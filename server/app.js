@@ -9,12 +9,14 @@ const app = express();
 
 const userRoutes = require('./routes/user');
 const speakerRoutes = require('./routes/speaker');
+const calendarRoutes = require('./routes/calendar');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 app.use(userRoutes);
 app.use(speakerRoutes);
+app.use(calendarRoutes);
 
 mongoose
     .connect(connectionString, { useUnifiedTopology: true, useNewUrlParser: true })

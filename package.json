@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js",
-    "start-dev": "nodemon ./index.js"
+    "start": "node ./server/app.js",
+    "start-dev": "nodemon ./server/app.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/paulinajewulska/Aurora-Design-Week-server#readme",
   "dependencies": {
-    "cookie-parser": "^1.4.5",
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.24"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

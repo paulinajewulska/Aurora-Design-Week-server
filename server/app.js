@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const connectionString = process.env.MONGODB_URI;
 
 const port = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ const errorHandler = require('./util/errorHandler');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
+app.use(cors());
 
 app.use(speakerRoutes);
 app.use(calendarRoutes);

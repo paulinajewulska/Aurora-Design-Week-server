@@ -1,25 +1,26 @@
-const Application = require('../models/contact');
-const Message = require('../models/contact');
+const contact = require('../models/contact');
 
-exports.postSendApplication = (req, res, next) => {
+exports.postSendApplication = async (req, res, next) => {
     const name = req.body.name;
     const email = req.body.email;
     const phoneNumber = req.body.phoneNumber;
-    const application = new Application({ name: name, email: email, phoneNumber: phoneNumber });
-    application.save().then(result => {
-        res.sendStatus(200);
-        console.log("Application received")
-    }).catch(err => next(err));
+    const application = new contact.Application({ name: name, email: email, phoneNumber: phoneNumber });
+    await application.save()
+        .then(result => {
+            console.log("Application received");
+            return res.sendStatus(200);
+        }).catch(err => next(err));
 }
 
 
-exports.postSendMessage = (req, res, next) => {
+exports.postSendMessage = async (req, res, next) => {
     const name = req.body.name;
     const email = req.body.email;
     const question = req.body.question;
-    const message = new Message({ name: name, email: email, question: question })
-    message.save().then(result => {
-        res.sendStatus(200);
-        console.log("Message received")
-    }).catch(err => next(err));
+    const message = new contact.Message({ name: name, email: email, question: question })
+    await message.save()
+        .then(result => {
+            console.log("Message received");
+            return res.sendStatus(200);
+        }).catch(err => next(err));
 }

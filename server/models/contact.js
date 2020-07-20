@@ -14,5 +14,7 @@ const messageScheme = new Schema({
     question: { type: String, required: true }
 });
 
-module.exports = mongoose.model('Application', applicationScheme, 'applications');
-module.exports = mongoose.model('Message', messageScheme, 'messages');
+module.exports = {
+    Application: mongoose.model('Application', applicationScheme, 'applications'),
+    Message: mongoose.model('Message', messageScheme, 'messages')
+}

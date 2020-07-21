@@ -7,7 +7,7 @@ const speakerSchema = new Schema({
     surname: { type: String, required: true, lowercase: true },
     country: { type: String, required: true },
     image: { type: String, required: false },
-    description: { type: Array, required: false }
+    description: { type: String, required: false }
 });
 
 module.exports = mongoose.model('Speaker', speakerSchema, 'speakers');

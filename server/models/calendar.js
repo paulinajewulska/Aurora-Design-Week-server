@@ -11,6 +11,7 @@ module.exports = mongoose.model('Performance', performanceSchema, 'performances'
 
 
 const calendarSchema = new Schema({
+    city: { type: String, required: true, lowercase: true },
     place: { type: String, required: true, lowercase: true },
     day: { type: Number, required: true, lowercase: true },
     month: { type: String, required: true },

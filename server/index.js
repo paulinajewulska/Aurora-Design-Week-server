@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const history = require('connect-history-api-fallback');
 const connectionString = process.env.MONGODB_URI;
 
 const port = process.env.PORT || 3000;
@@ -18,6 +19,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static('public'));
 app.use(cors());
+app.use(express.static('public'));
+app.use(history({
+    disableDotRule: true,
+    verbose: true
+}));
 
 app.use(speakerRoutes);
 app.use(calendarRoutes);

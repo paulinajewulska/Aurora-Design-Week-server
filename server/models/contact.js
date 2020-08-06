@@ -11,7 +11,7 @@ const applicationScheme = new Schema({
 const messageScheme = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
-    question: { type: String, required: true }
+    message: { type: String, required: true }
 });
 
 module.exports = {

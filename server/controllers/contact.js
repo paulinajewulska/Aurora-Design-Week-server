@@ -4,7 +4,7 @@ exports.postSendApplication = async (req, res, next) => {
     const name = req.body.name;
     const email = req.body.email;
     const phoneNumber = req.body.phoneNumber;
-    const application = new contact.Application({ name: name, email: email, phoneNumber: phoneNumber });
+    const application = new contact.Application({ name, email, phoneNumber });
     await application.save()
         .then(result => {
             console.log("Application received");
@@ -16,8 +16,8 @@ exports.postSendApplication = async (req, res, next) => {
 exports.postSendMessage = async (req, res, next) => {
     const name = req.body.name;
     const email = req.body.email;
-    const question = req.body.question;
-    const message = new contact.Message({ name: name, email: email, question: question })
+    const messageText = req.body.message;
+    const message = new contact.Message({ name, email, message: messageText })
     await message.save()
         .then(result => {
             console.log("Message received");

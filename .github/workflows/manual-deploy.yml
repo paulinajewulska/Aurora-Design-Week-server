@@ -1,0 +1,33 @@
+name: Manual deploy
+
+on: 
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch to build
+        default: master 
+        required: true
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Change directory 
+      run: |
+        cd /apps/Aurora-Design-Week-server
+
+    - name: Checkout repository
+      run: |
+        git clean -ffdx && git reset --hard HEAD
+        git fetch
+        git checkout ${{github.event.inputs.branch}}
+        git pull origin ${{github.event.inputs.branch}}
+
+    - name: Update packages
+      run: |
+        npm ci 
+
+    - name: Run application
+      run: |
+        env HOME=/apps pm2 restart aurora-server

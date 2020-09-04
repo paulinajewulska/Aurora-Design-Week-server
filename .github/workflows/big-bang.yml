@@ -1,0 +1,47 @@
+name: Deploy on commit 
+
+on: 
+  push:
+    branches:
+      - master
+      - actions_test
+
+jobs:
+  # test:
+    # - name: Checkout
+    #   uses: actions/checkout@v2
+
+    # - name: Use Node.js
+    #   uses: actions/setup-node@v1
+    #   with:
+    #     node-version: 12.x
+
+  deploy:
+    # needs: [test]
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2	
+
+    - name: Use Node.js	
+      uses: actions/setup-node@v1	
+      with:	
+        node-version: 12.x
+
+    - name: Change directory 
+      run: |
+        cd /apps/Aurora-Design-Week-server
+
+    - name: Update repository
+      run: |
+        git clean -ffdx && git reset --hard HEAD
+        git pull origin master
+
+    - name: Update packages
+      run: |
+        npm ci 
+
+    - name: Run application
+      run: |
+        env HOME=/apps pm2 restart aurora-server
